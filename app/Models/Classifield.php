@@ -9,6 +9,11 @@ class Classifield extends Model
 {
     use HasFactory;
 
+    public static function getRandomId(): int
+    {
+        return self::inRandomOrder()->value('id') ?? self::factory()->create()->id;
+    }
+
     protected $fillable = [
         'name',
         'price',
@@ -18,5 +23,10 @@ class Classifield extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function photos()
+    {
+        return $this->hasMany(Photo::class);
     }
 }

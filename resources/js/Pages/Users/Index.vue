@@ -3,6 +3,7 @@ import Pagination from "@/shared/Pagination.vue";
 import { ref, watch } from "vue";
 import { router } from "@inertiajs/vue3";
 import debounce from "lodash.debounce";
+import TableCellHeader from "@/shared/TableCellHeader.vue";
 
 let props = defineProps({
     users: Object,
@@ -34,7 +35,7 @@ watch(
 
             <Link
                 href="/users/create"
-                class="rounded bg-blue-500 px-2 py-1 text-sm text-white hover:bg-blue-600"
+                class="rounded bg-blue-500 px-2 py-1 text-lg text-white hover:bg-blue-600"
             >
                 Create User
             </Link>
@@ -57,6 +58,13 @@ watch(
                 >
                     <table class="min-w-full divide-y divide-gray-200">
                         <tbody class="divide-y divide-gray-200 bg-white">
+                            <tr>
+                                <TableCellHeader content="Name" />
+                                <TableCellHeader
+                                    content="Admin functions"
+                                    colspan="3"
+                                />
+                            </tr>
                             <tr v-for="user in users.data" :key="user.id">
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
@@ -74,10 +82,30 @@ watch(
                                     class="px-6 py-4 text-right text-sm font-medium whitespace-nowrap"
                                 >
                                     <Link
-                                        :href="`/users/${user.id}/edit`"
+                                        :href="`comingSoon`"
                                         class="text-indigo-600 hover:text-indigo-900"
                                     >
                                         Edit
+                                    </Link>
+                                </td>
+                                <td
+                                    class="px-6 py-4 text-right text-sm font-medium whitespace-nowrap"
+                                >
+                                    <Link
+                                        :href="`/comingSoon`"
+                                        class="text-yellow-600 hover:text-yellow-900"
+                                    >
+                                        Copy
+                                    </Link>
+                                </td>
+                                <td
+                                    class="px-6 py-4 text-right text-sm font-medium whitespace-nowrap"
+                                >
+                                    <Link
+                                        :href="`comingSoon`"
+                                        class="text-red-600 hover:text-red-900"
+                                    >
+                                        Delete
                                     </Link>
                                 </td>
                             </tr>

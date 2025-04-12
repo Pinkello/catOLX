@@ -21,11 +21,9 @@ class ClassifieldFactory extends Factory
             'name' => $this->faker->word(),
             'price' => $this->faker->randomFloat(2, 1, 100),
             'description' => $this->faker->sentence(),
-            // 'user_id' => User::factory(),
 
-            //z powodu braku rejestracji/logowania,
-            // użyto hardcode 1-111 id dla 111 utworzonych użytkowników w bazie danych
-            'user_id' => $this->faker->numberBetween(1, 111),
+            // nie mamy logowania/rejestracji więc losujemy randomowe id
+            'user_id' => User::getRandomId(),
         ];
     }
 }
