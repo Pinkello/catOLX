@@ -21,21 +21,27 @@ Aby uruchomić ten projekt, musisz mieć zainstalowane następujące narzędzia:
 
 2.  **Zainstaluj zależności**
 
-    composer install
+        composer install
 
-    npm install
+        npm install
 
 3.  **Ustaw zmienne środowiskowe**
 
-        Sklonuj plik .envexample i dostosuj do własnych potrzeb
+    Sklonuj plik .envexample i dostosuj do własnych potrzeb
 
 4.  **Odpowiednie komendy**
 
-php artisan storage:link - aplikacja przechowuje zdjęcia w storage i potrzebuje do niego linku
+        php artisan storage:link
 
-php artisan migrate --seed - utworzenie bazy danych oraz wypełnienie go przykładowymi danymi
+        php artisan migrate --seed
 
-npm run dev - do uruchomienia Vite
+        npm run dev
+
+Opis:
+
+- aplikacja przechowuje zdjęcia w storage i potrzebuje do niego linku
+- utworzenie bazy danych oraz wypełnienie go przykładowymi danymi
+- do uruchomienia Vite
 
 ######################## MIŁEGO KORZYSTANIA Z APLIKACJI! ####################
 
