@@ -19,6 +19,8 @@ defineProps({
 
 <template>
     <section
+        data-aos="fade-up"
+        data-aos-duration="1000"
         class="my-10 bg-gradient-to-r"
         :class="`${gradientFrom} ${gradientTo}`"
     >

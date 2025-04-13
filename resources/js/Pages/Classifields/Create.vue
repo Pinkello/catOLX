@@ -70,6 +70,7 @@ const photoFileErrors = computed(() => {
             <FormInput
                 label="Description"
                 name="description"
+                :type="'textarea'"
                 v-model="form.description"
                 :error="form.errors.description"
             />

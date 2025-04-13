@@ -2,6 +2,8 @@ import { createApp, h } from "vue";
 import { createInertiaApp, Link, Head } from "@inertiajs/vue3";
 import Layout from "./shared/Layout.vue";
 import Vue3Toastify from "vue3-toastify";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 createInertiaApp({
     resolve: (name) => {
@@ -18,9 +20,11 @@ createInertiaApp({
             .component("Link", Link)
             .component("Head", Head)
             .mount(el);
+
+        AOS.init();
     },
     progress: {
         color: "red",
     },
-    title: (title) => (title ? `My app - ${title}` : "My app"),
+    title: (title) => (title ? `CatOLX - ${title}` : "CatOLX"),
 });

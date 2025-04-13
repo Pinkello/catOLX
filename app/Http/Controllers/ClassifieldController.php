@@ -18,7 +18,7 @@ class ClassifieldController extends Controller
                     $query->where('name', 'like', "%$search%");
                 })
                 ->latest()
-                ->paginate(10)
+                ->paginate(5)
                 ->withQueryString()
                 ->through(fn($classifield) => [
                     'id' => $classifield->id,
@@ -54,7 +54,7 @@ class ClassifieldController extends Controller
             'photos.*.max' => 'Each photo may not be larger than 5MB.',
         ]);
 
-        $attributes['user_id'] = rand(1, 111);
+        $attributes['user_id'] = Classifield::getRandomId();
 
         $classifield = Classifield::create($attributes);
 

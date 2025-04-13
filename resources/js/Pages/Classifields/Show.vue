@@ -52,8 +52,8 @@ const nextPhoto = () => {
             </Link>
         </div>
         <div class="grid grid-cols-1 gap-12 md:grid-cols-2">
-            <div class="h-160 space-y-4 rounded-lg bg-gray-200 p-6 shadow">
-                <h1 class="mb-10 text-4xl font-bold text-gray-900">
+            <div class="min-h-160 space-y-4 rounded-lg bg-gray-200 p-6 shadow">
+                <h1 class="mb-10 text-4xl font-bold break-words text-gray-900">
                     {{ classifield.name }}
                 </h1>
                 <div
@@ -125,10 +125,11 @@ const nextPhoto = () => {
                     class="min-h-36 space-y-4 rounded-lg bg-gray-200 p-6 shadow"
                 >
                     <h2 class="text-2xl font-semibold text-gray-900">Seller</h2>
-                    <p class="text-4xl text-gray-800">
+                    <p class="text-4xl break-words text-green-600">
                         {{ classifield.user.name }}
                     </p>
                     <p class="text-base text-gray-700">
+                        <b>Published at:</b>
                         {{ formatDate(classifield.created_at) }}
                     </p>
                 </div>
@@ -136,7 +137,9 @@ const nextPhoto = () => {
                     class="min-h-36 space-y-4 rounded-lg bg-gray-200 p-6 shadow"
                 >
                     <h2 class="text-2xl font-semibold text-gray-900">Price</h2>
-                    <p class="text-xl text-gray-700">
+                    <p
+                        class="my-2 w-min rounded-lg bg-gradient-to-r from-blue-200 via-blue-300 to-blue-400 p-2 text-center font-sans text-xl text-stone-800 antialiased shadow-md"
+                    >
                         {{ formatPriceDollar(classifield.price) }}
                     </p>
                 </div>
@@ -146,7 +149,7 @@ const nextPhoto = () => {
                     <h2 class="text-2xl font-semibold text-gray-900">
                         Product Description
                     </h2>
-                    <p class="text-gray-700">
+                    <p class="break-words text-gray-700">
                         {{ classifield.description }}
                     </p>
                 </div>

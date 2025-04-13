@@ -22,7 +22,18 @@ const emit = defineEmits(["update:modelValue"]);
             {{ label }}
         </label>
 
+        <textarea
+            v-if="type === 'textarea'"
+            :id="name"
+            :name="name"
+            :value="modelValue"
+            @input="$emit('update:modelValue', $event.target.value)"
+            class="w-full rounded border border-gray-300 bg-white p-2"
+            rows="4"
+        ></textarea>
+
         <input
+            v-else
             :id="name"
             :name="name"
             :type="type"

@@ -13,13 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(100)->create();
-
-        // $faker = \Faker\Factory::create();
-
-        // User::factory(100)->create([
-        //     'name' => $faker->name(),
-        //     'email' => $faker->unique()->safeEmail(),
-        // ]);
+        User::factory(10)->create();
+        $this->call(ClassifieldSeeder::class);
     }
 }

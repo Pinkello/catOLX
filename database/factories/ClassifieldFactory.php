@@ -18,9 +18,9 @@ class ClassifieldFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->word(),
+            'name' => implode(' ', $this->faker->words(rand(3, 5))),
             'price' => $this->faker->randomFloat(2, 1, 100),
-            'description' => $this->faker->sentence(),
+            'description' => implode(' ', $this->faker->sentences(rand(5, 10))),
 
             // nie mamy logowania/rejestracji więc losujemy randomowe id
             'user_id' => User::getRandomId(),

@@ -67,11 +67,14 @@ const queryString = computed(() => {
                 >
                     {{ classifield.name }}
                 </h5>
-                <p class="mb-8 font-sans text-xl text-stone-800 antialiased">
+                <p
+                    class="my-2 w-min rounded-lg bg-gradient-to-r from-blue-200 via-blue-300 to-blue-400 p-2 text-center font-sans text-xl text-stone-800 antialiased shadow-md"
+                >
                     {{ formatPriceDollar(classifield.price) }}
                 </p>
                 <p class="mb-2 font-sans text-base text-stone-600 antialiased">
-                    Seller: <b>{{ classifield.user_name }}</b>
+                    Seller:
+                    <b class="text-green-600">{{ classifield.user_name }}</b>
                 </p>
 
                 <Link
