@@ -1,5 +1,10 @@
 <script setup>
 import { useForm } from "@inertiajs/vue3";
+import { computed } from "vue";
+import FormInput from "../../shared/FormInput.vue";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
+import ButtonSubmit from "../../shared/ButtonSubmit.vue";
 
 let form = useForm({
     name: "",
@@ -13,107 +18,113 @@ const handleFileChange = (event) => {
 };
 
 let submit = () => {
-    form.post("/classifields", {});
+    form.post("/classifields", {
+        onSuccess: () => {
+            toast.success("Classifield successfully created!", {
+                position: "top-right",
+                autoClose: 3000,
+            });
+        },
+    });
 };
+
+const photoFileErrors = computed(() => {
+    const errors = [];
+
+    if (form.errors.photos && typeof form.errors.photos === "string") {
+        errors.push(form.errors.photos);
+    }
+
+    Object.entries(form.errors || {}).forEach(([key, message]) => {
+        if (key.startsWith("photos.") && key !== "photos") {
+            errors.push(message);
+        }
+    });
+
+    return [...new Set(errors)];
+});
 </script>
 
 <template>
     <Head title="Create Classifield" />
-    <h1 class="text-3xl font-bold">Create new classifield</h1>
-
-    <form @submit.prevent="submit" class="mt-7 max-w-md">
-        <div class="mb-6">
-            <label
-                class="mb-2 block text-xs font-bold text-gray-700 uppercase"
-                for="name"
-                >Name</label
-            >
-
-            <input
-                v-model="form.name"
-                type="text"
+    <div
+        class="mx-auto mt-10 flex max-w-2xl flex-col items-center rounded-lg bg-gray-100 p-10 align-middle shadow-md"
+    >
+        <h1 class="text-3xl font-bold">Create new classifield</h1>
+        <form @submit.prevent="submit" class="mt-7 w-full max-w-lg">
+            <FormInput
+                label="Name"
                 name="name"
-                id="name"
-                class="w-full rounded border border-gray-300 p-2"
-                required
+                v-model="form.name"
+                :error="form.errors.name"
             />
-            <div
-                v-if="form.errors.name"
-                v-text="form.errors.name"
-                class="mt-1 text-xs text-red-500 italic"
-            ></div>
-        </div>
-        <div class="mb-6">
-            <label
-                class="mb-2 block text-xs font-bold text-gray-700 uppercase"
-                for="price"
-                >Price</label
-            >
-            <input
-                v-model="form.price"
-                type="number"
+
+            <FormInput
+                label="Price"
                 name="price"
-                id="price"
-                class="w-full rounded border border-gray-300 p-2"
-                required
+                type="number"
+                v-model="form.price"
+                :error="form.errors.price"
             />
-            <div
-                v-if="form.errors.price"
-                v-text="form.errors.price"
-                class="mt-1 text-xs text-red-500 italic"
-            ></div>
-        </div>
-        <div class="mb-6">
-            <label
-                class="mb-2 block text-xs font-bold text-gray-700 uppercase"
-                for="description"
-                >Description</label
-            >
-            <input
-                v-model="form.description"
-                type="description"
+
+            <FormInput
+                label="Description"
                 name="description"
-                id="description"
-                class="w-full rounded border border-gray-300 p-2"
-                required
+                v-model="form.description"
+                :error="form.errors.description"
             />
-            <div
-                v-if="form.errors.description"
-                v-text="form.errors.description"
-                class="mt-1 text-xs text-red-500 italic"
-            ></div>
-        </div>
 
-        <div class="mb-6">
-            <label
-                class="mb-2 block text-xs font-bold text-gray-700 uppercase"
-                for="photos"
-                >photos</label
-            >
-            <input
-                type="file"
-                name="photos[]"
-                id="photos"
-                class="w-full rounded border border-gray-300 p-2"
-                multiple
-                required
-                @change="handleFileChange"
-            />
-            <div
-                v-if="form.errors.description"
-                v-text="form.errors.description"
-                class="mt-1 text-xs text-red-500 italic"
-            ></div>
-        </div>
+            <div class="mb-6">
+                <label
+                    class="mb-2 block text-xs font-bold text-gray-700 uppercase"
+                    for="photos"
+                >
+                    Photos
+                </label>
 
-        <div class="mb-6">
-            <button
-                type="submit"
-                class="w-full rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-700"
-                :disabled="form.processing"
+                <div class="flex flex-col space-y-2">
+                    <label
+                        for="photos"
+                        class="w-fit cursor-pointer rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+                    >
+                        Choose Files
+                    </label>
+
+                    <input
+                        type="file"
+                        name="photos[]"
+                        id="photos"
+                        class="hidden"
+                        multiple
+                        @change="handleFileChange"
+                    />
+
+                    <ul
+                        v-if="form.photos && form.photos.length"
+                        class="list-inside list-disc text-sm text-gray-600"
+                    >
+                        <li
+                            v-for="(file, index) in form.photos"
+                            :key="index"
+                            class="rounded bg-white p-2 shadow-sm"
+                        >
+                            {{ file.name }}
+                        </li>
+                    </ul>
+                </div>
+
+                <div
+                    v-for="(error, index) in photoFileErrors"
+                    :key="index"
+                    class="mt-1 text-xs text-red-500 italic"
+                >
+                    {{ error }}
+                </div>
+            </div>
+
+            <ButtonSubmit :disabled="form.processing"
+                >Submit new Classifield</ButtonSubmit
             >
-                Submit
-            </button>
-        </div>
-    </form>
+        </form>
+    </div>
 </template>

@@ -1,5 +1,7 @@
 <script setup>
 import { ref } from "vue";
+import { formatDate } from "@/utils/dateFormatter";
+import { formatPriceDollar } from "../../utils/priceFormatter";
 
 const props = defineProps({
     classifield: Object,
@@ -85,7 +87,13 @@ const nextPhoto = () => {
                 <div class="mt-8">
                     <div
                         class="mt-4 grid gap-2"
-                        :class="`grid-cols-${props.classifield.photos.length}`"
+                        :class="{
+                            'grid-cols-1': classifield.photos.length === 1,
+                            'grid-cols-2': classifield.photos.length === 2,
+                            'grid-cols-3': classifield.photos.length === 3,
+                            'grid-cols-4': classifield.photos.length === 4,
+                            'grid-cols-5': classifield.photos.length === 5,
+                        }"
                     >
                         <div
                             v-for="(photo, index) in classifield.photos"
@@ -116,9 +124,20 @@ const nextPhoto = () => {
                 <div
                     class="min-h-36 space-y-4 rounded-lg bg-gray-200 p-6 shadow"
                 >
+                    <h2 class="text-2xl font-semibold text-gray-900">Seller</h2>
+                    <p class="text-4xl text-gray-800">
+                        {{ classifield.user.name }}
+                    </p>
+                    <p class="text-base text-gray-700">
+                        {{ formatDate(classifield.created_at) }}
+                    </p>
+                </div>
+                <div
+                    class="min-h-36 space-y-4 rounded-lg bg-gray-200 p-6 shadow"
+                >
                     <h2 class="text-2xl font-semibold text-gray-900">Price</h2>
                     <p class="text-xl text-gray-700">
-                        {{ classifield.price }}$
+                        {{ formatPriceDollar(classifield.price) }}
                     </p>
                 </div>
                 <div
@@ -128,21 +147,7 @@ const nextPhoto = () => {
                         Product Description
                     </h2>
                     <p class="text-gray-700">
-                        {{ classifield.description }} Product Description
-                        Product Description Product Description Product
-                        Description Product Description Product Description
-                        Product Description Product Description Product
-                        Description Product Description Product Description
-                        Product Description Product Description Product
-                        Description Product Description Product Description
-                        Product Description Product Description Product
-                        Description Product Description Product Description
-                        Product Description Product Description Product
-                        Description Product Description Product Description
-                        Product Description Product Description Product
-                        Description Product Description Product Description
-                        Product Description Product Description Product
-                        Description
+                        {{ classifield.description }}
                     </p>
                 </div>
             </div>

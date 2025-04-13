@@ -12,8 +12,8 @@ defineProps({
 <template>
     <Link
         :href="href"
-        class="text-black hover:underline"
-        :class="{ 'font-bold underline': active }"
+        class="rounded px-4 py-2 text-white transition duration-200 hover:bg-blue-500"
+        :class="{ 'bg-blue-600 font-semibold shadow-md': active }"
         ><slot></slot
     ></Link>
 </template>

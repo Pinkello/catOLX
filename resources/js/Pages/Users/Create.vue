@@ -1,5 +1,9 @@
 <script setup>
 import { useForm } from "@inertiajs/vue3";
+import FormInput from "../../shared/FormInput.vue";
+import ButtonSubmit from "../../shared/ButtonSubmit.vue";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
 
 let form = useForm({
     name: "",
@@ -8,85 +12,51 @@ let form = useForm({
 });
 
 let submit = () => {
-    form.post("/users", {});
+    form.post("/users", {
+        onSuccess: () => {
+            toast.success("User successfully created!", {
+                position: "top-right",
+                autoClose: 3000,
+            });
+        },
+    });
 };
 </script>
 
 <template>
     <Head title="Create User" />
-    <h1 class="text-3xl font-bold">Create new user</h1>
+    <div
+        class="mx-auto mt-10 flex max-w-2xl flex-col items-center rounded-lg bg-gray-100 p-10 align-middle shadow-md"
+    >
+        <h1 class="text-3xl font-bold">Create new user</h1>
 
-    <form @submit.prevent="submit" class="mt-7 max-w-md">
-        <div class="mb-6">
-            <label
-                class="mb-2 block text-xs font-bold text-gray-700 uppercase"
-                for="name"
-                >Name</label
-            >
-
-            <input
-                v-model="form.name"
-                type="text"
+        <form @submit.prevent="submit" class="mt-7 w-full max-w-lg">
+            <FormInput
+                label="Name"
                 name="name"
-                id="name"
-                class="w-full rounded border border-gray-300 p-2"
-                required
+                v-model="form.name"
+                :error="form.errors.name"
             />
-            <div
-                v-if="form.errors.name"
-                v-text="form.errors.name"
-                class="mt-1 text-xs text-red-500 italic"
-            ></div>
-        </div>
-        <div class="mb-6">
-            <label
-                class="mb-2 block text-xs font-bold text-gray-700 uppercase"
-                for="email"
-                >email</label
-            >
-            <input
-                v-model="form.email"
-                type="email"
-                name="email"
-                id="email"
-                class="w-full rounded border border-gray-300 p-2"
-                required
-            />
-            <div
-                v-if="form.errors.email"
-                v-text="form.errors.email"
-                class="mt-1 text-xs text-red-500 italic"
-            ></div>
-        </div>
-        <div class="mb-6">
-            <label
-                class="mb-2 block text-xs font-bold text-gray-700 uppercase"
-                for="password"
-                >password</label
-            >
-            <input
-                v-model="form.password"
-                type="password"
-                name="password"
-                id="password"
-                class="w-full rounded border border-gray-300 p-2"
-                required
-            />
-            <div
-                v-if="form.errors.password"
-                v-text="form.errors.password"
-                class="mt-1 text-xs text-red-500 italic"
-            ></div>
-        </div>
 
-        <div class="mb-6">
-            <button
-                type="submit"
-                class="w-full rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-700"
-                :disabled="form.processing"
+            <FormInput
+                label="Email"
+                name="email"
+                type="email"
+                v-model="form.email"
+                :error="form.errors.email"
+            />
+
+            <FormInput
+                label="password"
+                name="password"
+                type="password"
+                v-model="form.password"
+                :error="form.errors.password"
+            />
+
+            <ButtonSubmit :disabled="form.processing"
+                >Submit new User</ButtonSubmit
             >
-                Submit
-            </button>
-        </div>
-    </form>
+        </form>
+    </div>
 </template>

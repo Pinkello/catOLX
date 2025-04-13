@@ -17,14 +17,14 @@ const page = usePage();
 
     <section class="bg-blue-400 p-6">
         <header class="flex justify-between">
-            <div class="flex items-center">
+            <Link href="/" class="flex items-center">
                 <img
                     src="/public/images/logo.jpg"
                     alt="Logo"
                     class="mr-4 h-12 w-12 rounded-full"
                 />
                 <h1 class="mr-5 text-lg font-bold">CatOLX</h1>
-            </div>
+            </Link>
             <Nav />
         </header>
     </section>

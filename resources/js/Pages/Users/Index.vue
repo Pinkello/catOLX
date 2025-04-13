@@ -1,9 +1,10 @@
 <script setup>
 import Pagination from "@/shared/Pagination.vue";
 import { ref, watch } from "vue";
-import { router } from "@inertiajs/vue3";
-import debounce from "lodash.debounce";
 import TableCellHeader from "@/shared/TableCellHeader.vue";
+import ButtonCreate from "../../shared/ButtonCreate.vue";
+import PageTitle from "../../shared/PageTitle.vue";
+import SearchInput from "../../shared/SearchInput.vue";
 
 let props = defineProps({
     users: Object,
@@ -11,41 +12,22 @@ let props = defineProps({
 });
 
 let search = ref(props.filters.search || "");
-
-watch(
-    search,
-    debounce(function (value) {
-        router.get(
-            "/users",
-            { search: value },
-            {
-                preserveState: true,
-                replace: true,
-            },
-        );
-    }, 400),
-);
 </script>
 
 <template>
     <Head title="Users" />
     <div class="flex items-center justify-between">
         <div class="flex items-center space-x-4">
-            <h1 class="text-4xl font-bold">Users</h1>
-
-            <Link
-                href="/users/create"
-                class="rounded bg-blue-500 px-2 py-1 text-lg text-white hover:bg-blue-600"
-            >
-                Create User
-            </Link>
+            <PageTitle title="Users" />
+            <ButtonCreate href="users/create" content="Create New User" />
         </div>
-        <input
-            v-model="search"
-            type="text"
-            placeholder="Search..."
-            class="mt-2 mb-2 rounded border p-2"
-        />
+        <div>
+            <SearchInput
+                v-model="search"
+                route="/users"
+                placeholder="Search users..."
+            />
+        </div>
     </div>
 
     <div class="flex flex-col">

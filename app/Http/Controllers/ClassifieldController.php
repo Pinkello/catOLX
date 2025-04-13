@@ -13,9 +13,11 @@ class ClassifieldController extends Controller
     {
         return Inertia::render('Classifields/Index', [
             'classifields' => Classifield::query()
+                ->with('user')
                 ->when($request->input('search'), function ($query, $search) {
                     $query->where('name', 'like', "%$search%");
                 })
+                ->latest()
                 ->paginate(10)
                 ->withQueryString()
                 ->through(fn($classifield) => [
@@ -24,6 +26,8 @@ class ClassifieldController extends Controller
                     'price' => $classifield->price,
                     'description' => $classifield->description,
                     'photos' => $classifield->photos,
+                    'user_name' => $classifield->user->name,
+                    'created_at' => $classifield->created_at,
                 ]),
             'filters' => $request->only('search'),
         ]);
@@ -37,11 +41,17 @@ class ClassifieldController extends Controller
     public function store(Request $request)
     {
         $attributes = $request->validate([
-            'name' => 'required|max:255',
+            'name' => ['required', 'max:255'],
             'price' => ['required', 'numeric', 'max:999999'],
             'description' => ['required', 'max:255'],
-            'photos' => 'array|max:5',
-            'photos.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'photos' => ['required', 'array', 'max:5'],
+            'photos.*' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+        ], [
+            'photos.required' => 'You must upload at least one photo.',
+            'photos.*.required' => 'Each photo is required.',
+            'photos.*.image' => 'Each file must be an image.',
+            'photos.*.mimes' => 'Allowed formats: jpeg, png, jpg, gif, svg.',
+            'photos.*.max' => 'Each photo may not be larger than 5MB.',
         ]);
 
         $attributes['user_id'] = rand(1, 111);
@@ -64,7 +74,7 @@ class ClassifieldController extends Controller
 
     public function show($id)
     {
-        $classifield = Classifield::with('photos')->findOrFail($id);
+        $classifield = Classifield::with('photos', 'user')->findOrFail($id);
 
         return Inertia::render('Classifields/Show', [
             'classifield' => $classifield,

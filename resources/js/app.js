@@ -1,6 +1,7 @@
 import { createApp, h } from "vue";
 import { createInertiaApp, Link, Head } from "@inertiajs/vue3";
 import Layout from "./shared/Layout.vue";
+import Vue3Toastify from "vue3-toastify";
 
 createInertiaApp({
     resolve: (name) => {
@@ -13,6 +14,7 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
             .use(plugin)
+            .use(Vue3Toastify)
             .component("Link", Link)
             .component("Head", Head)
             .mount(el);
