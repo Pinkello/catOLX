@@ -50,10 +50,10 @@ const photoFileErrors = computed(() => {
     <div
         class="mx-auto mt-10 flex max-w-2xl flex-col items-center rounded-lg bg-gray-100 p-10 align-middle shadow-md"
     >
-        <h1 class="text-3xl font-bold">Create new classifield</h1>
+        <h1 class="text-3xl font-bold">Create new Classifield</h1>
         <form @submit.prevent="submit" class="mt-7 w-full max-w-lg">
             <FormInput
-                label="Name"
+                label="Name of Item"
                 name="name"
                 v-model="form.name"
                 :error="form.errors.name"
@@ -80,7 +80,7 @@ const photoFileErrors = computed(() => {
                     class="mb-2 block text-xs font-bold text-gray-700 uppercase"
                     for="photos"
                 >
-                    Photos
+                    Photos (1-5)
                 </label>
 
                 <div class="flex flex-col space-y-2">

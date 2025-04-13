@@ -34,9 +34,9 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $attributes = $request->validate([
-            'name' => 'required|max:255',
+            'name' => ['required', 'min:3', 'max:255'],
             'email' => ['required', 'email', 'max:255'],
-            'password' => ['required', 'max:25'],
+            'password' => ['required', 'min:5', 'max:25'],
         ]);
 
         User::create($attributes);

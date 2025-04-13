@@ -41,9 +41,9 @@ class ClassifieldController extends Controller
     public function store(Request $request)
     {
         $attributes = $request->validate([
-            'name' => ['required', 'max:255'],
-            'price' => ['required', 'numeric', 'max:999999'],
-            'description' => ['required', 'max:255'],
+            'name' => ['required', 'max:255', "min:3"],
+            'price' => ['required', 'numeric', 'max:999999', 'min:1'],
+            'description' => ['required', 'max:1000', 'min:10'],
             'photos' => ['required', 'array', 'max:5'],
             'photos.*' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ], [
@@ -51,7 +51,7 @@ class ClassifieldController extends Controller
             'photos.*.required' => 'Each photo is required.',
             'photos.*.image' => 'Each file must be an image.',
             'photos.*.mimes' => 'Allowed formats: jpeg, png, jpg, gif, svg.',
-            'photos.*.max' => 'Each photo may not be larger than 5MB.',
+            'photos.*.max' => 'Each photo may not be larger than 2MB.',
         ]);
 
         $attributes['user_id'] = Classifield::getRandomId();

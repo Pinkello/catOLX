@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { formatDate } from "@/utils/dateFormatter";
 import { formatPriceDollar } from "../../utils/priceFormatter";
+import ButtonGoBack from "../../shared/ButtonGoBack.vue";
 
 const props = defineProps({
     classifield: Object,
@@ -30,26 +31,7 @@ const nextPhoto = () => {
 <template>
     <div class="mx-auto max-w-7xl px-6 py-12">
         <div class="mb-4">
-            <Link
-                :href="returnUrl"
-                class="flex items-center font-bold text-blue-400 hover:underline"
-            >
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="mr-2 h-5 w-5"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M15.75 19.5L8.25 12l7.5-7.5"
-                    />
-                </svg>
-                Go Back
-            </Link>
+            <ButtonGoBack :returnUrl="returnUrl" />
         </div>
         <div class="grid grid-cols-1 gap-12 md:grid-cols-2">
             <div class="min-h-160 space-y-4 rounded-lg bg-gray-200 p-6 shadow">

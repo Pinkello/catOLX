@@ -5,6 +5,7 @@ import TableCellHeader from "@/shared/TableCellHeader.vue";
 import ButtonCreate from "../../shared/ButtonCreate.vue";
 import PageTitle from "../../shared/PageTitle.vue";
 import SearchInput from "../../shared/SearchInput.vue";
+import TableCellControl from "../../shared/TableCellControl.vue";
 
 let props = defineProps({
     users: Object,
@@ -59,37 +60,21 @@ let search = ref(props.filters.search || "");
                                         </div>
                                     </div>
                                 </td>
-
-                                <td
-                                    class="px-6 py-4 text-right text-sm font-medium whitespace-nowrap"
-                                >
-                                    <Link
-                                        :href="`comingSoon`"
-                                        class="text-indigo-600 hover:text-indigo-900"
-                                    >
-                                        Edit
-                                    </Link>
-                                </td>
-                                <td
-                                    class="px-6 py-4 text-right text-sm font-medium whitespace-nowrap"
-                                >
-                                    <Link
-                                        :href="`/comingSoon`"
-                                        class="text-yellow-600 hover:text-yellow-900"
-                                    >
-                                        Copy
-                                    </Link>
-                                </td>
-                                <td
-                                    class="px-6 py-4 text-right text-sm font-medium whitespace-nowrap"
-                                >
-                                    <Link
-                                        :href="`comingSoon`"
-                                        class="text-red-600 hover:text-red-900"
-                                    >
-                                        Delete
-                                    </Link>
-                                </td>
+                                <TableCellControl
+                                    :href="`/comingSoon`"
+                                    content="Edit"
+                                    customClass="text-indigo-600 hover:text-indigo-900"
+                                />
+                                <TableCellControl
+                                    :href="`/comingSoon`"
+                                    content="Copy"
+                                    customClass="text-yellow-600 hover:text-yellow-900"
+                                />
+                                <TableCellControl
+                                    :href="`/comingSoon`"
+                                    content="Delete"
+                                    customClass="text-red-600 hover:text-red-900"
+                                />
                             </tr>
                         </tbody>
                     </table>
