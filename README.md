@@ -1,4 +1,45 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# catOLX
+
+## Opis
+
+Aplikacja-demo na potrzeby rekrutacyjne i dla kocich fanów ;)
+
+## Wymagania
+
+Aby uruchomić ten projekt, musisz mieć zainstalowane następujące narzędzia:
+
+- PHP >= 8.0
+- Composer
+- npm
+- MySQL
+
+## Instalacja
+
+1.  **Skopiuj repozytorium**
+
+    Sklonuj repozytorium na swoje lokalne środowisko
+
+2.  **Zainstaluj zależności**
+
+    composer install
+
+    npm install
+
+3.  **Ustaw zmienne środowiskowe**
+
+        Sklonuj plik .envexample i dostosuj do własnych potrzeb
+
+4.  **Odpowiednie komendy**
+
+php artisan storage:link - aplikacja przechowuje zdjęcia w storage i potrzebuje do niego linku
+
+php artisan migrate --seed - utworzenie bazy danych oraz wypełnienie go przykładowymi danymi
+
+npm run dev - do uruchomienia Vite
+
+######################## MIŁEGO KORZYSTANIA Z APLIKACJI! ####################
+
+ <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
